@@ -2,6 +2,7 @@ package sg.edu.rp.c346.id18016204.taskmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,9 @@ public class AddActivity extends AppCompatActivity {
                 String desc = etDesc.getText().toString();
                 DBHelper dbh = new DBHelper(AddActivity.this);
                 dbh.insertTask(name, desc);
+                Intent intent = new Intent(AddActivity.this,MainActivity.class);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 

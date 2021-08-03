@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  Intent i = new Intent(MainActivity.this, AddActivity.class);
-              //  startActivity(i);
+                Intent i = new Intent(MainActivity.this, AddActivity.class);
+                startActivityForResult(i,9);
             }
         });
 
@@ -45,5 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 9){
+            DBHelper dbh = new DBHelper(MainActivity.this);
+            al.clear();
+            al.addAll(dbh.getAllTasks());
+            dbh.close();
+            aa.notifyDataSetChanged();
+        }
     }
 }
