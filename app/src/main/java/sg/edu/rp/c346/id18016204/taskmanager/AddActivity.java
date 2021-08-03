@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -39,7 +40,10 @@ public class AddActivity extends AppCompatActivity {
                 DBHelper dbh = new DBHelper(AddActivity.this);
                 dbh.insertTask(name, desc);
 
-
+                Toast.makeText(AddActivity.this, "Insert successful",
+                        Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(AddActivity.this,MainActivity.class);
+                setResult(RESULT_OK, intent2);
                 //=================Alarm====================
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AddActivity.this);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -61,6 +65,7 @@ public class AddActivity extends AppCompatActivity {
                 am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
                         pendingIntent);
                 //=================Alarm====================
+                finish();
             }
         });
 
